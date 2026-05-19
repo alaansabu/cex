@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    /* Target & Environment */
+    "target": "ES2022",                               /* Modern Node.js environments support ES2022 features */
+    "module": "NodeNext",                             /* Required for modern Node/ESM resolution */
+    "moduleResolution": "NodeNext",                   /* Ensures TS mimics Node's module resolution */
+    "lib": ["ES2022"],                                /* Only include server-side APIs (no DOM/Browser APIs) */
+
+    /* Build Artifacts */
+    "outDir": "./dist",                               /* Where your compiled JavaScript files will go */
+    "rootDir": "./src",                               /* Point to your source files directory */
+    "sourceMap": true,                                /* Crucial for debugging production errors back to your TS source code */
+
+    /* Strict Type-Checking */
+    "strict": true,                                   /* Enables all strict type-checking options */
+    "noImplicitAny": true,                            /* Error on expressions and declarations with an implied 'any' type */
+    "strictNullChecks": true,                         /* Ensures you handle null and undefined explicitly */
+
+    /* Additional Checks */
+    "noUnusedLocals": true,                           /* Report errors on unused local variables */
+    "noUnusedParameters": true,                       /* Report errors on unused function parameters */
+    "noImplicitReturns": true,                        /* Ensure all code paths in a function return a value */
+    "noFallthroughCasesInSwitch": true,               /* Report errors for fallthrough cases in switch statements */
+
+    /* Module & Interop */
+    "esModuleInterop": true,                          /* Fixes compatibility issues when importing CommonJS modules like Express */
+    "forceConsistentCasingInFileNames": true,         /* Ensures case sensitivity works across Windows, Mac, and Linux */
+    "skipLibCheck": true                              /* Skips type checking of declaration files (saves compile time) */
+  },
+  "include": ["src/**/*"],                            /* Tells the compiler to look inside your src folder */
+  "exclude": ["node_modules", "dist", "**/*.spec.ts"] /* Keeps Node modules and build files out of the compilation process */
+}
