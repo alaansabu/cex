@@ -1,4 +1,8 @@
+name: cex
+version: '3.8'
+
 services:
+  # 1. Redis Cache Service
   redis:
     image: redis:alpine3.20
     container_name: cex-redis
@@ -8,35 +12,45 @@ services:
     networks:
       - cex-network
 
-  mongo:
-    image: mongo:8.0
-    container_name: centrelised-exchange
+  # 2. PostgreSQL Database Service
+  postgres:
+    image: postgres:16.9-alpine
+    container_name: cex-postgres
     restart: always
     ports:
-      - "27017:27017"
+      - "5432:5432" # Keeps host port 8080 open for your local Prisma/Backend connection
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=cexadmin
-      - MONGO_INITDB_ROOT_PASSWORD=admindb
+      POSTGRES_USER: cexadmin
+      POSTGRES_PASSWORD: alan@admin
+      POSTGRES_DB: cex_database
+    volumes:
+      - cex-db-data:/var/lib/postgresql/data
     networks:
       - cex-network
 
-  mongo-express:
-    image: mongo-express:1.0.2-20-alpine3.19
-    container_name: cex-mongo-gui
+  # 3. Web-based pgAdmin Service
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: cex-pgadmin
     restart: always
     ports:
-      - "8081:8081"
+      - "5050:80" # Maps port 5050 on your machine to the pgAdmin web server
     environment:
-      - ME_CONFIG_MONGODB_SERVER=centrelised-exchange
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=bdev1
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=xpulse200
-      - ME_CONFIG_BASICAUTH_USERNAME=alan
-      - ME_CONFIG_BASICAUTH_PASSWORD=mypass
+      PGADMIN_DEFAULT_EMAIL: bdev1dmin@cex.com   # Web login email
+      PGADMIN_DEFAULT_PASSWORD: bdev1alan # Web login password
+    volumes:
+      - cex-pgadmin-data:/var/lib/pgadmin     # Saves your pgAdmin server connections
+    networks:
+      - cex-network
     depends_on:
-      - mongo
-    networks:
-      - cex-network
+      - postgres # Tells Docker to start PostgreSQL first
 
+# Networks for internal service-to-service communication
 networks:
   cex-network:
     driver: bridge
+
+# Volumes for hard drive data persistence
+volumes:
+  cex-db-data:
+  cex-pgadmin-data:

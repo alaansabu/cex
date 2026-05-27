@@ -8,17 +8,19 @@
   "main": "server.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "nodemon dist/server.js",
-    "dev": "tsc -w & npm start"
+    "start": "node --env-file=.env dist/server.js",
+    "dev": "nodemon --watch src --ext ts --exec \"npm run build && npm start\""
   },
   "dependencies": {
-    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
     "express": "^5.2.1",
-    "mongoose": "^9.6.2"
+    "pg": "^8.21.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^25.9.1",
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.31.10",
     "nodemon": "^3.1.14",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
