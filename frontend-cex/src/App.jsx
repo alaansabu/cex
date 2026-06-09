@@ -1,12 +1,9 @@
 import './App.css';
-import { ButtonOne } from './components/Button';
-
+import  {LoginForm} from '../../frontend-cex/src/features/auth/login/login'
 function App() {
     return (
-        <div>
-            <ButtonOne text="Hello World" onClick={() => console.log('Clicked!')} />
-        </div>
-    );
+    <LoginForm/>
+    )
 }
 
 export default App;
