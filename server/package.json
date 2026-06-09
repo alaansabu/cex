@@ -12,6 +12,7 @@
     "dev": "nodemon --watch src --ext ts --exec \"npm run build && npm start\""
   },
   "dependencies": {
+    "bcrypt-ts": "^8.0.1",
     "drizzle-orm": "^0.45.2",
     "express": "^5.2.1",
     "pg": "^8.21.0"
