@@ -1,4 +1,4 @@
-import { pgTable , varchar ,timestamp ,serial , integer, date,boolean} from "drizzle-orm/pg-core";
+import { pgTable , varchar ,timestamp ,serial , integer, date,boolean,} from "drizzle-orm/pg-core";
 
 
 //users schema
@@ -20,7 +20,16 @@ export const users = pgTable('users',{
     createdAt: timestamp('created_at', { withTimezone: true })
     .defaultNow()
     .notNull(),
+
+    status:varchar('status',{length:20})
+    .default("Active")
+    .notNull(),
+
+    lastlogin:timestamp("lastlogin",{withTimezone:true})
+
 })
+
+export type userDocuments = typeof users.$inferSelect
 
 //userprofile schema
 
