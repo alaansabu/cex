@@ -1,4 +1,4 @@
-import { pgTable , varchar ,timestamp ,serial , integer, date,boolean,} from "drizzle-orm/pg-core";
+import { pgTable , varchar ,timestamp ,serial , integer, date,boolean,uuid} from "drizzle-orm/pg-core";
 
 
 //users schema
@@ -61,8 +61,8 @@ export const userprofile = pgTable('userprofile',{
 export const sessions = pgTable('sessions',{
 
 
-    sessionId: serial('session_id').primaryKey(),
-    
+    sessionId: uuid('').defaultRandom().primaryKey(),
+
     userId: integer('user_id')
         .notNull()
         .references(() => users.userId, { onDelete: 'cascade' }),
