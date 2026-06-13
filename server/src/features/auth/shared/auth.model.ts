@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import { pgTable , varchar ,timestamp ,serial , integer, date} from "drizzle-orm/pg-core";
+=======
 import { pgTable , varchar ,timestamp ,serial , integer, date,boolean,uuid} from "drizzle-orm/pg-core";
+>>>>>>> origin/main
 
 
 //users schema
@@ -20,6 +24,10 @@ export const users = pgTable('users',{
     createdAt: timestamp('created_at', { withTimezone: true })
     .defaultNow()
     .notNull(),
+<<<<<<< HEAD
+})
+
+=======
 
     status:varchar('status',{length:20})
     .default("Active")
@@ -31,6 +39,7 @@ export const users = pgTable('users',{
 
 export type userDocuments = typeof users.$inferSelect
 
+>>>>>>> origin/main
 //userprofile schema
 
 export const userprofile = pgTable('userprofile',{
@@ -52,6 +61,8 @@ export const userprofile = pgTable('userprofile',{
         .notNull() 
 })
 
+<<<<<<< HEAD
+=======
 //sessiones schema
 
 /* */
@@ -93,3 +104,4 @@ export const security = pgTable('security', {
     
     codeExpiresAt: timestamp('code_expires_at', { withTimezone: true }),
 });
+>>>>>>> origin/main
