@@ -1,6 +1,9 @@
-import './App.css'
-import Button from './components/Button'
+import './App.css';
+import  {LoginForm} from '../../frontend-cex/src/features/auth/login/login'
+function App() {
+    return (
+    <LoginForm/>
+    )
+}
 
-
-
-export default App
+export default App;
