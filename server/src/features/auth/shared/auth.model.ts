@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { pgTable , varchar ,timestamp ,serial , integer, date} from "drizzle-orm/pg-core";
+=======
+import { pgTable , varchar ,timestamp ,serial , integer, date,boolean,uuid} from "drizzle-orm/pg-core";
+>>>>>>> origin/main
 
 
 //users schema
@@ -20,8 +24,22 @@ export const users = pgTable('users',{
     createdAt: timestamp('created_at', { withTimezone: true })
     .defaultNow()
     .notNull(),
+<<<<<<< HEAD
 })
 
+=======
+
+    status:varchar('status',{length:20})
+    .default("Active")
+    .notNull(),
+
+    lastlogin:timestamp("lastlogin",{withTimezone:true})
+
+})
+
+export type userDocuments = typeof users.$inferSelect
+
+>>>>>>> origin/main
 //userprofile schema
 
 export const userprofile = pgTable('userprofile',{
@@ -43,3 +61,47 @@ export const userprofile = pgTable('userprofile',{
         .notNull() 
 })
 
+<<<<<<< HEAD
+=======
+//sessiones schema
+
+/* */
+//sessiones schema
+
+
+export const sessions = pgTable('sessions',{
+
+
+    sessionId: uuid('').defaultRandom().primaryKey(),
+
+    userId: integer('user_id')
+        .notNull()
+        .references(() => users.userId, { onDelete: 'cascade' }),
+        
+    
+    sessionStart: timestamp('session_start', { withTimezone: true })
+        .defaultNow() 
+        .notNull(),
+        
+    sessionEnd: timestamp('session_end', { withTimezone: true }),
+
+})
+
+//security schema
+
+export const security = pgTable('security', {
+    securityId: serial('security_id').primaryKey(),
+    
+    
+    userId: integer('user_id')
+        .notNull()
+        .unique() 
+        .references(() => users.userId, { onDelete: 'cascade' }),
+        
+    is2faEnabled: boolean('is_2fa_enabled').default(false).notNull(),
+    
+    verificationCode: varchar('verification_code', { length: 6 }),
+    
+    codeExpiresAt: timestamp('code_expires_at', { withTimezone: true }),
+});
+>>>>>>> origin/main
