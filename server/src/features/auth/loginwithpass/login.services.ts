@@ -16,7 +16,7 @@ export const loginwithpass = async(credentials:loginCredentials):Promise<loginPa
     
 
     // vefifying client cred
-    const isMatch = verifyPassword(credentials.password,hashPassword)
+    const isMatch = await verifyPassword(credentials.password,hashPassword)
     
     if(!isMatch){
         throw new Error("Invalid username or password");
